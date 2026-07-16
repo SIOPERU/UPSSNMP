@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIO | Continuidad Operativa y UPS B2B</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        sio: {
+                            dark: '#0B1121', // Fondo principal
+                            card: '#151E32', // Fondo de tarjetas
+                            primary: '#F97316', // Naranja/Dorado
+                            secondary: '#1E3A8A', // Azul Oscuro
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #0B1121;
+            color: #F8FAFC;
+        }
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glass-panel {
+            background: rgba(21, 30, 50, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        /* Custom Scrollbar para el modal */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0B1121;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden selection:bg-sio-primary selection:text-white">
+
+    <nav class="fixed w-full z-40 glass-panel border-b border-white/10 transition-all duration-300 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer">
+                    <img src="https://i.postimg.cc/j5vYPzfJ/PRUEBA-LOGO-removebg-preview.png" alt="Logo SIO Enterprise" class="h-12 w-auto object-contain drop-shadow-md">
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#soluciones" class="text-slate-300 hover:text-white transition-colors text-sm font-medium">Modelos de Servicio</a>
+                    <a href="#equipos" class="text-slate-300 hover:text-white transition-colors text-sm font-medium">Catálogo de Equipos</a>
+                    <button onclick="openModal()" class="bg-gradient-to-r from-sio-primary to-sio-secondary text-white px-6 py-2.5 rounded-md font-semibold transition-all hover:shadow-[0_0_20px_rgba(249,115,22,0.5)] transform hover:-translate-y-0.5">
+                        Cotizar Solución
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <!-- Luces de fondo -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none">
+            <div class="absolute top-20 left-10 w-96 h-96 bg-sio-primary rounded-full mix-blend-screen filter blur-[150px] opacity-20"></div>
+            <div class="absolute top-40 right-10 w-96 h-96 bg-sio-secondary rounded-full mix-blend-screen filter blur-[150px] opacity-20"></div>
+        </div>
+
+        <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel text-sio-primary text-xs sm:text-sm font-semibold mb-8 border border-sio-primary/30 uppercase tracking-wider">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sio-primary opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-sio-primary"></span>
+                </span>
+                Sistemas B2B de Energía Crítica
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
+                Protege tus Servidores y <br class="hidden md:block">
+                <span class="bg-gradient-to-r from-sio-primary to-sio-secondary gradient-text">Evita la Corrupción de Datos.</span>
+            </h1>
+            
+            <p class="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-slate-400 mb-10 leading-relaxed">
+                No vendemos cajas. Entregamos soluciones UPS pre-configuradas con IPs estáticas, listas para conectarse a tu red y garantizar el apagado ordenado de tus sistemas TI.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button onclick="openModal()" class="bg-white text-sio-dark px-8 py-4 rounded-lg font-bold text-lg hover:bg-slate-100 transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] flex justify-center items-center gap-2">
+                    <i class="fas fa-server"></i> Solicitar Auditoría de Carga
+                </button>
+                <a href="#soluciones" class="glass-panel text-white border border-slate-600 hover:bg-slate-800 px-8 py-4 rounded-lg font-bold text-lg transition-all flex justify-center items-center gap-2">
+                    Comparar Modelos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="soluciones" class="py-24 bg-sio-card/30 relative border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">El hardware es igual. <span class="text-sio-primary">La configuración es la diferencia.</span></h2>
+                <p class="text-slate-400 text-lg">Evita que tu equipo de redes pierda días configurando parámetros y puertos. Elige cómo quieres recibir tu equipo de protección eléctrica.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                
+                <!-- Nivel 1: Solo Fierro -->
+                <div class="glass-panel rounded-2xl p-8 border border-slate-700 hover:border-slate-500 transition-colors flex flex-col">
+                    <div class="mb-6">
+                        <span class="bg-slate-800 text-slate-300 text-xs font-bold uppercase tracking-wider py-1 px-3 rounded block w-max mb-4">Nivel 1: Solo Equipo</span>
+                        <h3 class="text-2xl font-bold mb-2">Hardware Estándar</h3>
+                        <p class="text-slate-400 text-sm h-10">Ideal para operaciones que buscan protección eléctrica de alta calidad, sin la necesidad de monitoreo remoto avanzado.</p>
+                    </div>
+                    
+                    <ul class="space-y-4 flex-grow mb-8 text-slate-300">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check text-slate-500 mt-1"></i>
+                            <span>UPS Online Doble Conversión (Caja sellada).</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check text-slate-500 mt-1"></i>
+                            <span>Gestión local básica vía puerto USB.</span>
+                        </li>
+                        <li class="flex items-start gap-3 opacity-40">
+                            <i class="fas fa-times text-slate-600 mt-1"></i>
+                            <span class="line-through">Tarjeta de Red (SNMP) instalada.</span>
+                        </li>
+                        <li class="flex items-start gap-3 opacity-40">
+                            <i class="fas fa-times text-slate-600 mt-1"></i>
+                            <span class="line-through">Pre-configuración de IP y Apagado Ordenado.</span>
+                        </li>
+                    </ul>
+                    
+                    <button onclick="openModal('Nivel 1')" class="w-full py-3 rounded-lg border border-slate-600 text-slate-300 hover:bg-slate-800 transition-colors font-semibold">
+                        Cotizar Solo Equipo
+                    </button>
+                </div>
+
+                <!-- Nivel 2: SIO Plug & Play (Destacado) -->
+                <div class="relative rounded-2xl p-8 bg-gradient-to-b from-slate-800 to-sio-dark border-2 border-sio-primary shadow-[0_0_40px_rgba(249,115,22,0.15)] flex flex-col transform md:-translate-y-4">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-sio-primary text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wide shadow-lg">
+                        <i class="fas fa-star mr-1"></i> Recomendado para TI
+                    </div>
+                    
+                    <div class="mb-6 mt-2">
+                        <span class="bg-sio-primary/20 text-sio-primary text-xs font-bold uppercase tracking-wider py-1 px-3 rounded block w-max mb-4">Nivel 2: Solución Integral</span>
+                        <h3 class="text-2xl font-bold mb-2 text-white">SIO "Plug & Play" (Red)</h3>
+                        <p class="text-cyan-100/70 text-sm h-10">Entregamos el UPS listo para conectarse al Switch de tu servidor e integrarse a tu monitoreo.</p>
+                    </div>
+                    
+                    <ul class="space-y-4 flex-grow mb-8 text-slate-200">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check-circle text-sio-primary mt-1"></i>
+                            <span>UPS Online Doble Conversión.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check-circle text-sio-primary mt-1"></i>
+                            <span class="font-medium text-white">Tarjeta de Red SNMP Multi-protocolo instalada.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check-circle text-sio-primary mt-1"></i>
+                            <span class="font-medium text-white">Inyección de IP Estática, Subred y Gateway en laboratorio.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check-circle text-sio-primary mt-1"></i>
+                            <span>Asesoría en protocolo de apagado de Servidores.</span>
+                        </li>
+                    </ul>
+                    
+                    <button onclick="openModal('Nivel 2')" class="w-full py-4 rounded-lg bg-gradient-to-r from-sio-primary to-sio-secondary hover:opacity-90 text-white font-bold transition-all shadow-[0_0_15px_rgba(249,115,22,0.4)] text-lg">
+                        Cotizar Solución "Plug & Play"
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="equipos" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Catálogo Rápido Corporativo</h2>
+                <p class="text-slate-400 text-lg">Selecciona la capacidad y el formato para iniciar el dimensionamiento. Todos son Monofásicos.</p>
+            </div>
+
+            <!-- Tabs Formato con Botones Simples -->
+            <div class="flex justify-center mb-12">
+                <div class="bg-sio-card p-1.5 rounded-xl border border-slate-700 flex gap-2">
+                    <button id="btn-torre" onclick="switchFormat('Torre')" class="px-6 py-3 rounded-lg font-bold bg-slate-700 text-white transition-all duration-300 flex items-center gap-2">
+                        <i class="fas fa-box"></i> Formato Torre (Piso)
+                    </button>
+                    <button id="btn-rack" onclick="switchFormat('Rack')" class="px-6 py-3 rounded-lg font-bold text-slate-400 hover:text-white transition-all duration-300 flex items-center gap-2">
+                        <i class="fas fa-server"></i> Formato Rackeable (Gabinete)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Catálogo Dividido en Visualizador (Izquierda) e interactivo kVA (Derecha) -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch max-w-6xl mx-auto">
+                
+                <!-- Visualizador del Formato (Mediano / Grande) -->
+                <div class="lg:col-span-5 glass-panel rounded-2xl p-8 border border-slate-700 flex flex-col justify-between items-center text-center relative overflow-hidden bg-gradient-to-b from-slate-900/60 to-sio-dark">
+                    <div class="absolute top-3 right-3 bg-sio-primary/10 border border-sio-primary/30 text-sio-primary text-xs font-bold px-3 py-1 rounded-full uppercase">
+                        Vista de Chasis
+                    </div>
+                    
+                    <!-- Contenedor de Imagen Mediano/Grande -->
+                    <div class="my-6 flex items-center justify-center h-64 w-full">
+                        <img id="visual-format-img" src="https://i.postimg.cc/vBvgV2jW/6-T.png" alt="UPS SIO" class="max-h-full max-w-full object-contain drop-shadow-[0_10px_20px_rgba(249,115,22,0.15)] transition-all duration-500 transform hover:scale-105">
+                    </div>
+
+                    <div>
+                        <h3 id="visual-format-title" class="text-2xl font-extrabold text-white mb-2">Formato Torre (Piso)</h3>
+                        <p id="visual-format-desc" class="text-sm text-slate-400 max-w-xs mx-auto">
+                            Ideal para colocar al costado de escritorios, estaciones de trabajo o salas TI pequeñas sin armario estructurado.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Selección rápida de kVA -->
+                <div class="lg:col-span-7 flex flex-col justify-center space-y-6">
+                    <div class="text-left">
+                        <h4 class="text-xl font-bold text-white mb-2"><i class="fas fa-bolt text-sio-primary mr-2"></i>Selecciona la potencia:</h4>
+                        <p class="text-slate-400 text-sm">Haz clic en la capacidad que requiere tu infraestructura para cotizarla de inmediato en el formato seleccionado.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        
+                        <div onclick="selectEquipment('1 kVA')" class="glass-panel p-6 rounded-xl border border-slate-700 hover:border-sio-primary/50 transition-all text-left group cursor-pointer hover:bg-slate-800/50 flex items-center justify-between">
+                            <div>
+                                <h4 class="text-2xl font-black text-white group-hover:text-sio-primary transition-colors">1 <span class="text-sm text-slate-400 font-normal">kVA</span></h4>
+                                <p class="text-xs text-slate-500 mt-1"><i class="fas fa-video mr-1"></i>CCTV / Routers</p>
+                            </div>
+                            <i class="fas fa-chevron-right text-slate-600 group-hover:text-sio-primary transition-colors"></i>
+                        </div>
+                        
+                        <div onclick="selectEquipment('2 kVA')" class="glass-panel p-6 rounded-xl border border-slate-700 hover:border-sio-primary/50 transition-all text-left group cursor-pointer hover:bg-slate-800/50 flex items-center justify-between">
+                            <div>
+                                <h4 class="text-2xl font-black text-white group-hover:text-sio-primary transition-colors">2 <span class="text-sm text-slate-400 font-normal">kVA</span></h4>
+                                <p class="text-xs text-slate-500 mt-1"><i class="fas fa-network-wired mr-1"></i>Switches de Borde</p>
+                            </div>
+                            <i class="fas fa-chevron-right text-slate-600 group-hover:text-sio-primary transition-colors"></i>
+                        </div>
+
+                        <div onclick="selectEquipment('3 kVA')" class="relative glass-panel p-6 rounded-xl border border-sio-primary/40 hover:border-sio-primary transition-all text-left group cursor-pointer bg-slate-800/30 flex items-center justify-between">
+                            <div class="absolute -top-3 right-4 bg-sio-secondary text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full">MÁS BUSCADO</div>
+                            <div>
+                                <h4 class="text-2xl font-black text-white group-hover:text-sio-secondary transition-colors">3 <span class="text-sm text-slate-400 font-normal">kVA</span></h4>
+                                <p class="text-xs text-slate-500 mt-1"><i class="fas fa-server mr-1"></i>Servidor Core</p>
+                            </div>
+                            <i class="fas fa-chevron-right text-slate-600 group-hover:text-sio-secondary transition-colors"></i>
+                        </div>
+
+                        <div onclick="selectEquipment('6 kVA')" class="glass-panel p-6 rounded-xl border border-slate-700 hover:border-sio-primary/50 transition-all text-left group cursor-pointer hover:bg-slate-800/50 flex items-center justify-between">
+                            <div>
+                                <h4 class="text-2xl font-black text-white group-hover:text-sio-primary transition-colors">6 <span class="text-sm text-slate-400 font-normal">kVA</span></h4>
+                                <p class="text-xs text-slate-500 mt-1"><i class="fas fa-layer-group mr-1"></i>Rack de Datos Mediano</p>
+                            </div>
+                            <i class="fas fa-chevron-right text-slate-600 group-hover:text-sio-primary transition-colors"></i>
+                        </div>
+
+                        <div onclick="selectEquipment('10 kVA')" class="sm:col-span-2 glass-panel p-6 rounded-xl border border-slate-700 hover:border-sio-primary/50 transition-all text-left group cursor-pointer hover:bg-slate-800/50 flex items-center justify-between">
+                            <div>
+                                <h4 class="text-2xl font-black text-white group-hover:text-sio-primary transition-colors">10 <span class="text-sm text-slate-400 font-normal">kVA</span></h4>
+                                <p class="text-xs text-slate-500 mt-1"><i class="fas fa-building mr-1"></i>Continuidad de Piso / Data Centers Distribuidos</p>
+                            </div>
+                            <i class="fas fa-chevron-right text-slate-600 group-hover:text-sio-primary transition-colors"></i>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>
+    </section>
+
+    <footer class="bg-[#070b14] border-t border-slate-800 py-8 mt-10">
+        <div class="max-w-7xl mx-auto px-4 text-center text-slate-500 text-sm">
+            <p><i class="fas fa-bolt text-sio-primary mr-2"></i>SIO Enterprise - Expertos en Continuidad Operativa B2B.</p>
+        </div>
+    </footer>
+
+    <div id="crm-modal" class="fixed inset-0 z-[100] hidden items-center justify-center px-4">
+        
+        <!-- Overlay oscuro -->
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
+        
+        <!-- Contenedor del Modal -->
+        <div class="relative bg-[#111827] w-full max-w-2xl rounded-2xl border border-slate-700 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            
+            <!-- Cabecera del Modal -->
+            <div class="p-5 border-b border-slate-700 bg-slate-800 flex justify-between items-center sticky top-0 z-10">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded bg-sio-primary/20 flex items-center justify-center text-sio-primary">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-white leading-tight">Levantamiento de Información</h3>
+                        <p class="text-xs text-slate-400">Tus datos viajarán a nuestro CRM seguro.</p>
+                    </div>
+                </div>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-white transition-colors p-2 bg-slate-700/50 rounded-lg">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Cuerpo del Formulario -->
+            <div class="p-6 overflow-y-auto custom-scrollbar bg-sio-dark">
+                
+                <!-- Formulario Visible -->
+                <form id="sio-lead-form" onsubmit="submitForm(event)" class="space-y-5">
+                    
+                    <!-- Fila 1: Datos Cliente -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-1">Empresa</label>
+                            <input type="text" id="frm-empresa" required placeholder="Ej: Clínica San Juan" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-sio-primary focus:ring-1 focus:ring-sio-primary transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-1">Nombre del Contacto (TI / Compras)</label>
+                            <input type="text" id="frm-nombre" required placeholder="Ing. Roberto Gómez" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-sio-primary focus:ring-1 focus:ring-sio-primary transition-all">
+                        </div>
+                    </div>
+
+                    <!-- Fila 2: Contacto -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-1">Correo Electrónico (Para Cotización)</label>
+                            <input type="email" id="frm-correo" required placeholder="roberto@empresa.com" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-sio-primary focus:ring-1 focus:ring-sio-primary transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-1">WhatsApp (Seguimiento rápido)</label>
+                            <input type="tel" id="frm-whatsapp" required placeholder="+51 999 999 999" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-sio-primary focus:ring-1 focus:ring-sio-primary transition-all">
+                        </div>
+                    </div>
+
+                    <div class="w-full h-px bg-slate-800 my-2"></div>
+
+                    <!-- Fila 3: Selección de Solución -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">¿Qué modelo de servicio evaluaremos?</label>
+                        <select id="frm-servicio" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-sio-primary appearance-none cursor-pointer">
+                            <option value="Nivel 2">Nivel 2: Solución Integral (UPS + Tarjeta SNMP Configurada) - Recomendado</option>
+                            <option value="Nivel 1">Nivel 1: Solo Equipo Hardware (Para instalación propia)</option>
+                            <option value="Asesoria">No estoy seguro, necesito asesoría técnica</option>
+                        </select>
+                    </div>
+
+                    <!-- Fila 4: Specs Técnicas -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-1">Capacidad Estimada (kVA)</label>
+                            <select id="frm-kva" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-sio-primary appearance-none cursor-pointer">
+                                <option value="1 kVA">1 kVA</option>
+                                <option value="2 kVA">2 kVA</option>
+                                <option value="3 kVA">3 kVA (Servidor Core)</option>
+                                <option value="6 kVA">6 kVA</option>
+                                <option value="10 kVA">10 kVA</option>
+                                <option value="Pendiente">Necesito dimensionamiento</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-1">Formato de Chasis</label>
+                            <select id="frm-formato" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-sio-primary appearance-none cursor-pointer">
+                                <option value="Torre">Torre (Va en el piso)</option>
+                                <option value="Rack">Rackeable (Va dentro del Gabinete)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Botón de Envío -->
+                    <div class="pt-4 pb-2">
+                        <button type="submit" id="btn-submit" class="w-full bg-sio-primary hover:brightness-110 text-white font-bold py-4 rounded-lg transition-all flex justify-center items-center gap-2 shadow-[0_0_15px_rgba(249,115,22,0.3)]">
+                            <i class="fas fa-paper-plane"></i>
+                            <span>Enviar y Generar Pre-Cotización</span>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Pantalla de Éxito Simulando Make/Airtable -->
+                <div id="success-message" class="hidden text-center py-10 flex-col items-center justify-center">
+                    <div class="relative w-24 h-24 mb-6 mx-auto">
+                        <!-- Animación de radar simulando conexión a API -->
+                        <div class="absolute inset-0 rounded-full border-4 border-green-500/20 animate-ping"></div>
+                        <div class="absolute inset-0 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 text-4xl border border-green-500">
+                            <i class="fas fa-check"></i>
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold text-white mb-3">¡Datos enviados con éxito!</h3>
+                    
+                    <div class="bg-slate-900 rounded-lg p-4 border border-slate-800 text-left max-w-sm mx-auto mb-6">
+                        <p class="text-sm text-slate-400 mb-2 font-mono"><i class="fas fa-terminal text-sio-primary mr-2"></i>Log del Sistema Operativo SIO:</p>
+                        <ul class="text-xs text-green-400 font-mono space-y-1">
+                            <li>> Lead registrado de forma segura... [OK]</li>
+                            <li>> FormSubmit procesando envío... [OK]</li>
+                            <li>> Notificación de cotización en camino... [OK]</li>
+                        </ul>
+                    </div>
+
+                    <p class="text-slate-300">Un asesor se pondrá en contacto contigo o recibirás un correo con la cotización en breve.</p>
+                    
+                    <button onclick="closeModal()" class="mt-8 px-6 py-2 border border-slate-600 rounded text-slate-300 hover:bg-slate-800 transition-colors">
+                        Cerrar y volver a la web
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Variables globales
+        const modal = document.getElementById('crm-modal');
+        const form = document.getElementById('sio-lead-form');
+        const successMsg = document.getElementById('success-message');
+        
+        // Elementos del formulario para auto-selección
+        const selectServicio = document.getElementById('frm-servicio');
+        const selectKva = document.getElementById('frm-kva');
+        const selectFormato = document.getElementById('frm-formato');
+        
+        let currentFormat = 'Torre';
+
+        // Elementos del Visualizador Dinámico de Formato
+        const visualImg = document.getElementById('visual-format-img');
+        const visualTitle = document.getElementById('visual-format-title');
+        const visualDesc = document.getElementById('visual-format-desc');
+
+        // Abrir Modal y opcionalmente pre-seleccionar valores
+        function openModal(preselectedTier = null) {
+            // Mostrar Modal
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden'; // Evitar scroll
+            
+            // Si el usuario hizo clic en "Nivel 1" o "Nivel 2" en los botones grandes
+            if (preselectedTier) {
+                for(let i=0; i < selectServicio.options.length; i++) {
+                    if(selectServicio.options[i].value.includes(preselectedTier)) {
+                        selectServicio.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+        }
+
+        // Seleccionar formato y abrir modal desde el catálogo
+        function selectEquipment(kva) {
+            openModal();
+            // Asignar el kVA
+            for(let i=0; i < selectKva.options.length; i++) {
+                if(selectKva.options[i].value.includes(kva)) {
+                    selectKva.selectedIndex = i;
+                    break;
+                }
+            }
+            // Asignar el formato actual (Torre o Rack)
+            for(let i=0; i < selectFormato.options.length; i++) {
+                if(selectFormato.options[i].value === currentFormat) {
+                    selectFormato.selectedIndex = i;
+                    break;
+                }
+            }
+        }
+
+        // Cerrar Modal y resetear estado
+        function closeModal() {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = 'auto';
+            
+            // Retrasar el reseteo visual para que no se vea mientras se desvanece
+            setTimeout(() => {
+                form.classList.remove('hidden');
+                successMsg.classList.add('hidden');
+                successMsg.classList.remove('flex');
+                form.reset();
+            }, 300);
+        }
+
+        // Lógica de Tabs del Catálogo e Imagen
+        function switchFormat(format) {
+            currentFormat = format;
+            const btnTorre = document.getElementById('btn-torre');
+            const btnRack = document.getElementById('btn-rack');
+            
+            if (format === 'Torre') {
+                btnTorre.classList.replace('text-slate-400', 'text-white');
+                btnTorre.classList.add('bg-slate-700');
+                btnRack.classList.replace('text-white', 'text-slate-400');
+                btnRack.classList.remove('bg-slate-700');
+
+                // Actualizar Visualizador con imagen grande y efectos
+                visualImg.style.opacity = '0';
+                setTimeout(() => {
+                    visualImg.src = "https://i.postimg.cc/vBvgV2jW/6-T.png";
+                    visualImg.alt = "UPS Formato Torre";
+                    visualTitle.textContent = "Formato Torre (Piso)";
+                    visualDesc.textContent = "Ideal para colocar al costado de escritorios, estaciones de trabajo o salas TI pequeñas sin armario estructurado.";
+                    visualImg.style.opacity = '1';
+                }, 200);
+
+            } else {
+                btnRack.classList.replace('text-slate-400', 'text-white');
+                btnRack.classList.add('bg-slate-700');
+                btnTorre.classList.replace('text-white', 'text-slate-400');
+                btnTorre.classList.remove('bg-slate-700');
+
+                // Actualizar Visualizador con imagen grande y efectos
+                visualImg.style.opacity = '0';
+                setTimeout(() => {
+                    visualImg.src = "https://i.postimg.cc/BQ7FpyvR/categoria-6-10-rt.png";
+                    visualImg.alt = "UPS Formato Rackeable";
+                    visualTitle.textContent = "Formato Rackeable (Gabinete)";
+                    visualDesc.textContent = "Especialmente diseñado para atornillarse dentro de Gabinetes estándar de 19 pulgadas. Ahorra espacio de forma segura.";
+                    visualImg.style.opacity = '1';
+                }, 200);
+            }
+        }
+
+        // Integración real con Formspree.io
+        function submitForm(e) {
+            e.preventDefault(); // Evitar recarga de página
+            
+            const submitBtn = document.getElementById('btn-submit');
+            const originalText = submitBtn.innerHTML;
+            
+            // Cambiamos el texto del botón para que parezca que está procesando
+            submitBtn.innerHTML = 'Enviando solicitud... <i class="fas fa-spinner fa-spin ml-2"></i>';
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-75');
+
+            // === PON TU ENLACE ÚNICO DE FORMSPREE AQUÍ ===
+            const urlFormspree = "https://formspree.io/f/xpqvznbw"; // Ej: https://formspree.io/f/xyzabcde
+
+            // Recolectamos los valores y los enviamos
+            fetch(urlFormspree, {
+                method: "POST",
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    "Asunto": "NUEVO LEAD - Cotización de UPS SIO",
+                    "Empresa": document.getElementById('frm-empresa').value,
+                    "Nombre_Contacto": document.getElementById('frm-nombre').value,
+                    "Correo_Cliente": document.getElementById('frm-correo').value,
+                    "WhatsApp_Cliente": document.getElementById('frm-whatsapp').value,
+                    "Potencia_Requerida_y_Formato": document.getElementById('frm-kva').value + " - Formato: " + document.getElementById('frm-formato').value,
+                    "Tipo_de_Servicio": document.getElementById('frm-servicio').value
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Mostramos el mensaje de éxito sin recargar la página
+                    form.classList.add('hidden');
+                    successMsg.classList.remove('hidden');
+                    successMsg.classList.add('flex');
+                } else {
+                    throw new Error('Error en la respuesta de red');
+                }
+            })
+            .catch(error => {
+                alert('Hubo un error al enviar tu solicitud. Por favor, contáctanos directo al WhatsApp.');
+            })
+            .finally(() => {
+                // Restauramos el botón siempre, haya error o no
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-75');
+            });
+        }
+    </script>
+
+    <!-- Botón Flotante de WhatsApp -->
+    <a href="https://wa.me/51994468545?text=Hola%20SIO,%20necesito%20asesoría%20rápida%20sobre%20un%20UPS%20para%20mi%20empresa." target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-[0_4px_14px_rgba(37,211,102,0.4)] hover:scale-110 hover:bg-[#20bd5a] transition-all duration-300 group">
+        <i class="fab fa-whatsapp"></i>
+        <!-- Tooltip (Opcional, aparece al pasar el mouse) -->
+        <span class="absolute right-16 bg-slate-800 text-white text-xs font-semibold px-3 py-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border border-slate-700">
+            Chat rápido con un Asesor
+        </span>
+    </a>
+</body>
+</html>
